@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Somos Repuestos Motos | Confianza que Acelera tu Camino</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Chosen Palette: Warm Neutrals with Strategic Accents (Negro Técnico, Rojo Energía, Azul Confianza) -->
+    <!-- Application Structure Plan: A single-page application centered around a primary "Avatar Selector" (Taller, Flota, Particular). This core interactive element dynamically changes the displayed content, creating a personalized user journey for each key customer segment without page reloads. This task-oriented architecture directly implements the report's strategy of guiding users to the most relevant information, featuring tailored solutions, interactive tools like a simple ROI calculator for workshops, and specific calls-to-action. Shared sections for social proof and value proposition reinforce the brand message for all users. This design was chosen for its efficiency in qualifying users and presenting a custom value proposition immediately, enhancing engagement and conversion potential. -->
+    <!-- Visualization & Content Choices: 
+        - User Segmentation -> Goal: Navigate/Organize -> Method: Interactive Tab-like Button Group -> Interaction: Clicking a button updates the main content area via JS (hiding/showing divs). Justification: Core mechanism for a seamless, personalized SPA experience. Library: Vanilla JS.
+        - Value Proposition -> Goal: Inform/Organize -> Method: Icon-based Grid Layout using HTML/Tailwind -> Interaction: Subtle hover effects. Justification: Visually breaks down key differentiators into digestible chunks.
+        - "Calculadora de Pérdidas" -> Goal: Engage/Inform -> Method: Interactive Form -> Interaction: User inputs data, JS calculates and displays estimated monthly loss in real-time. Justification: Powerful tool that quantifies the user's problem and demonstrates immediate value. Library: Vanilla JS.
+        - Key Stats (+30 años experiencia) -> Goal: Build Trust -> Method: Dynamic Counter -> Interaction: Numbers animate on scroll into view. Justification: Creates a dynamic and engaging way to present impressive figures. Library: Vanilla JS.
+        - Common Failure Points -> Goal: Show Expertise -> Method: Bar Chart -> Interaction: Animated bars and tooltips on hover. Justification: Visually represents the data-driven expertise from analyzing thousands of repairs. Library: Chart.js.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;600&family=Roboto:wght@400;70-0&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+        h1, h2, h3, .font-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+        .hero-bg {
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('freepik__the-style-is-3d-model-with-octane-render-volumetri__61153.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .avatar-btn {
+            transition: all 0.3s ease;
+        }
+        .avatar-btn.active {
+            background-color: #E63946;
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+         .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-[#1A1A1A] text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="android-chrome-192x192.png" alt="Logo de Somos Repuestos Motos" class="h-10 mr-3">
+                <span class="text-xl font-title self-center whitespace-nowrap">Somos Repuestos Motos</span>
+            </a>
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="#soluciones" class="hover:text-[#E63946] transition-colors">Soluciones</a>
+                <a href="#nosotros" class="hover:text-[#E63946] transition-colors">Nosotros</a>
+                <a href="#contacto" class="bg-[#E63946] px-4 py-2 rounded-md hover:bg-red-700 transition-colors">Contacto Inmediato</a>
+            </nav>
+            <button class="md:hidden text-2xl">☰</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-bg text-white">
+            <div class="container mx-auto px-6 py-24 md:py-32 text-center">
+                <h2 class="text-4xl md:text-6xl font-title leading-tight mb-4">Confianza que Acelera tu Camino</h2>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto">Más de 30 años de experiencia garantizando el movimiento de talleres, flotas y motociclistas. Descubre la solución experta que necesitas.</p>
+            </div>
+        </section>
+
+        <section id="soluciones" class="py-16 md:py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-title text-[#1A1A1A]">Un Aliado para Cada Necesidad</h3>
+                    <p class="mt-4 text-lg text-gray-600">Selecciona tu perfil para ver las soluciones personalizadas que tenemos para ti.</p>
+                </div>
+                
+                <div id="avatar-selector" class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 mb-12">
+                    <button data-view="taller" class="avatar-btn active w-full md:w-auto text-lg bg-gray-200 hover:bg-gray-300 text-[#1A1A1A] font-semibold py-4 px-8 rounded-lg shadow-md">
+                        🔧 Soy un Taller
+                    </button>
+                    <button data-view="flota" class="avatar-btn w-full md:w-auto text-lg bg-gray-200 hover:bg-gray-300 text-[#1A1A1A] font-semibold py-4 px-8 rounded-lg shadow-md">
+                        🚚 Gestiono una Flota
+                    </button>
+                    <button data-view="particular" class="avatar-btn w-full md:w-auto text-lg bg-gray-200 hover:bg-gray-300 text-[#1A1A1A] font-semibold py-4 px-8 rounded-lg shadow-md">
+                        🏍️ Busco Repuestos
+                    </button>
+                </div>
+
+                <div id="dynamic-content-container" class="max-w-5xl mx-auto">
+                    <div id="taller-content" class="content-section active">
+                        <div class="bg-gray-100 p-8 rounded-xl shadow-inner">
+                            <h4 class="text-3xl font-title text-[#1A1A1A] text-center mb-2">Soluciones para Talleres</h4>
+                            <p class="text-xl text-center text-[#E63946] font-semibold mb-6">Aumenta tu rentabilidad. No pierdas más clientes por falta de stock.</p>
+                            <div class="grid md:grid-cols-2 gap-8 items-center">
+                                <div>
+                                    <p class="mb-4">Nuestro sistema **"Taller Siempre Listo"** es más que una simple entrega de repuestos. Es una alianza estratégica diseñada para eliminar tu principal dolor de cabeza: decirle "no tengo" a un cliente. Te proveemos con kits de alta rotación, logística prioritaria y el respaldo de 30 años de experiencia para que tu taller nunca se detenga.</p>
+                                    <ul class="space-y-2 mb-6">
+                                        <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Kits de inventario predictivo.</li>
+                                        <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Entrega prioritaria en horas.</li>
+                                        <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Asesoría técnica directa.</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow-lg">
+                                    <h5 class="text-xl font-semibold text-center mb-4">Calculadora de Pérdidas</h5>
+                                    <p class="text-sm text-center text-gray-600 mb-4">Descubre cuánto dinero podrías estar perdiendo al mes.</p>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label for="lost-clients" class="block text-sm font-medium text-gray-700">Clientes rechazados por semana</label>
+                                            <input type="number" id="lost-clients" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0077B6] focus:ring focus:ring-[#0077B6] focus:ring-opacity-50" placeholder="Ej: 5">
+                                        </div>
+                                        <div>
+                                            <label for="avg-repair" class="block text-sm font-medium text-gray-700">Costo promedio de reparación (COP)</label>
+                                            <input type="number" id="avg-repair" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0077B6] focus:ring focus:ring-[#0077B6] focus:ring-opacity-50" placeholder="Ej: 150000">
+                                        </div>
+                                    </div>
+                                    <div class="mt-6 text-center bg-red-100 p-4 rounded-lg">
+                                        <p class="text-gray-700">Pérdida mensual estimada:</p>
+                                        <p id="loss-result" class="text-2xl font-bold text-[#E63946]">$0 COP</p>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="text-center mt-8">
+                                <a href="#contacto" class="bg-[#E63946] text-white font-bold py-3 px-8 rounded-lg hover:bg-red-700 transition-transform transform hover:scale-105 shadow-lg">Agenda tu Sesión Estratégica</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="flota-content" class="content-section">
+                        <div class="bg-gray-100 p-8 rounded-xl shadow-inner">
+                            <h4 class="text-3xl font-title text-[#1A1A1A] text-center mb-2">Programa para Flotas</h4>
+                            <p class="text-xl text-center text-[#E63946] font-semibold mb-6">Maximiza el tiempo operativo y reduce costos de mantenimiento.</p>
+                            <div class="text-left">
+                                <p class="mb-4">Una moto detenida es una pérdida directa de ingresos. Nuestro **"Programa Flota Operativa 24/7"** está diseñado para gerentes de logística que necesitan máxima eficiencia. Analizamos tu flota, creamos un plan de mantenimiento preventivo y te damos acceso a una bodega virtual con stock reservado para tus emergencias. Nos convertimos en tu socio logístico para que tu negocio nunca pare.</p>
+                                <ul class="grid md:grid-cols-2 gap-x-8 gap-y-2 mb-6">
+                                    <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Análisis y diagnóstico de flota.</li>
+                                    <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Bodega virtual con stock reservado.</li>
+                                    <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Descuentos por volumen y crédito.</li>
+                                    <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Logística de entrega en sitio.</li>
+                                </ul>
+                                <div class="mt-8 bg-white p-6 rounded-lg shadow-lg">
+                                     <h5 class="text-xl font-semibold text-center mb-4">Visión Data-Driven: Puntos Críticos de Falla</h5>
+                                     <p class="text-center text-gray-600 mb-4">Basado en el análisis de más de 500,000 reparaciones, identificamos los componentes que más fallan en flotas de alto uso. Nuestro programa se enfoca en reforzarlos preventivamente.</p>
+                                     <div class="chart-container">
+                                        <canvas id="fleetChart"></canvas>
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-8">
+                                <a href="#contacto" class="bg-[#E63946] text-white font-bold py-3 px-8 rounded-lg hover:bg-red-700 transition-transform transform hover:scale-105 shadow-lg">Solicita un Análisis de Flota Gratuito</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="particular-content" class="content-section">
+                        <div class="bg-gray-100 p-8 rounded-xl shadow-inner">
+                            <h4 class="text-3xl font-title text-[#1A1A1A] text-center mb-2">Repuestos para tu Moto</h4>
+                            <p class="text-xl text-center text-[#E63946] font-semibold mb-6">Conduce con tranquilidad. Repuestos de calidad 100% garantizada.</p>
+                            <p class="text-center max-w-3xl mx-auto mb-8">Sabemos que tu moto es más que un vehículo. Es tu libertad, tu trabajo, tu pasión. Por eso, no dejamos nada al azar. Cada repuesto en nuestro catálogo ha pasado por un riguroso control de calidad basado en nuestra experiencia. Compra con la seguridad de que estás instalando lo mejor. Tu tranquilidad es nuestra garantía.</p>
+                            <div class="grid md:grid-cols-3 gap-6 text-center">
+                                <div class="bg-white p-6 rounded-lg shadow">
+                                    <div class="text-4xl mb-2">🔍</div>
+                                    <h5 class="font-semibold text-lg">Filtros Fáciles</h5>
+                                    <p class="text-gray-600 text-sm">Encuentra tu repuesto por marca, modelo y año sin complicaciones.</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow">
+                                    <div class="text-4xl mb-2">🛡️</div>
+                                    <h5 class="font-semibold text-lg">Calidad Verificada</h5>
+                                    <p class="text-gray-600 text-sm">Cada producto incluye guías y verificación de autenticidad.</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow">
+                                    <div class="text-4xl mb-2">💬</div>
+                                    <h5 class="font-semibold text-lg">Asesoría Directa</h5>
+                                    <p class="text-gray-600 text-sm">¿Dudas? Un experto te responde por WhatsApp al instante.</p>
+                                </div>
+                            </div>
+                            <div class="text-center mt-8">
+                                <a href="#" class="bg-[#0077B6] text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-800 transition-transform transform hover:scale-105 shadow-lg">Ir a la Tienda Online</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="proposicion-valor" class="py-16 md:py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-title text-[#1A1A1A]">Más que Repuestos, Soluciones</h3>
+                    <p class="mt-4 text-lg text-gray-600">Nuestra diferencia se basa en cuatro pilares sólidos.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <div class="text-5xl text-[#E63946] mb-4">🎓</div>
+                        <h4 class="text-xl font-semibold mb-2">Expertise Técnico</h4>
+                        <p class="text-gray-600">30 años en el sector nos dan un conocimiento que ninguna tienda online puede igualar. Te asesoramos correctamente.</p>
+                    </div>
+                     <div class="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <div class="text-5xl text-[#E63946] mb-4">🎯</div>
+                        <h4 class="text-xl font-semibold mb-2">Nicho en Motocargueros</h4>
+                        <p class="text-gray-600">Somos los líderes en un mercado desatendido, ofreciendo soluciones específicas para vehículos de trabajo.</p>
+                    </div>
+                     <div class="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <div class="text-5xl text-[#E63946] mb-4">🚀</div>
+                        <h4 class="text-xl font-semibold mb-2">Entrega Inmediata</h4>
+                        <p class="text-gray-600">Nuestra logística integrada con Shopify + Dropi garantiza que tengas tu repuesto cuando lo necesitas. Sin demoras.</p>
+                    </div>
+                     <div class="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <div class="text-5xl text-[#E63946] mb-4">🤝</div>
+                        <h4 class="text-xl font-semibold mb-2">Garantía Total</h4>
+                        <p class="text-gray-600">No vendemos nada en lo que no confiemos. Cada producto está respaldado por nuestra promesa de calidad y tranquilidad.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="nosotros" class="py-16 md:py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-title text-[#1A1A1A] mb-4">Nuestro Legado: Tres Décadas de Confianza</h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">Somos Repuestos Motos nació hace más de 30 años no como una tienda, sino como la pasión de un experto por la mecánica y el servicio. Empezamos en un pequeño local, conociendo a cada cliente por su nombre y el sonido de su motor. Hoy, esa misma dedicación la hemos llevado al mundo digital.</p>
+                        <p class="text-gray-600 leading-relaxed">No somos una corporación sin rostro. Somos la evolución de ese ejecutivo de ventas que recorría el país, construyendo relaciones basadas en la honestidad. Cada clic en nuestra web, cada consulta en WhatsApp, lleva consigo el peso y el orgullo de esa historia. Somos tu aliado experto, antes, ahora y siempre.</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <span class="text-4xl font-title text-[#E63946] block stat-counter" data-target="30">0</span>
+                            <span class="text-gray-600">Años de Experiencia</span>
+                        </div>
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <span class="text-4xl font-title text-[#E63946] block stat-counter" data-target="500000">0</span>
+                            <span class="text-gray-600">Reparaciones Analizadas</span>
+                        </div>
+                         <div class="bg-gray-100 p-6 rounded-lg">
+                            <span class="text-4xl font-title text-[#E63946] block stat-counter" data-target="100">0</span>
+                            <span class="text-gray-600">% Garantía</span>
+                        </div>
+                         <div class="bg-gray-100 p-6 rounded-lg">
+                            <span class="text-4xl font-title text-[#E63946] block stat-counter" data-target="24">0</span>
+                            <span class="text-gray-600">Horas para Entrega</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contacto" class="py-16 md:py-20 bg-[#1A1A1A] text-white">
+             <div class="container mx-auto px-6 text-center">
+                <h3 class="text-3xl md:text-4xl font-title mb-4">¿Listo para Acelerar?</h3>
+                <p class="text-lg max-w-2xl mx-auto mb-8">Nuestro equipo de expertos está listo para darte una solución inmediata. Contáctanos y recibe la asesoría que necesitas ahora mismo.</p>
+                <a href="https://wa.me/573001234567?text=Hola%2C%20necesito%20asesor%C3%ADa%20con%20repuestos." target="_blank" class="inline-block bg-[#25D366] text-white font-bold py-4 px-8 rounded-lg hover:bg-green-600 transition-transform transform hover:scale-105 shadow-lg text-xl">
+                    <span class="inline-block mr-2">✆</span> Hablar por WhatsApp
+                </a>
+             </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-900 text-gray-400 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Somos Repuestos Motos. Todos los derechos reservados.</p>
+            <p class="text-sm mt-2">Una empresa del ecosistema ADSI.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const avatarSelector = document.getElementById('avatar-selector');
+            const contentSections = document.querySelectorAll('.content-section');
+            const buttons = avatarSelector.querySelectorAll('.avatar-btn');
+
+            function showView(viewName) {
+                contentSections.forEach(section => {
+                    if (section.id === `${viewName}-content`) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+
+                buttons.forEach(button => {
+                    if (button.dataset.view === viewName) {
+                        button.classList.add('active');
+                    } else {
+                        button.classList.remove('active');
+                    }
+                });
+            }
+
+            avatarSelector.addEventListener('click', function(e) {
+                if (e.target && e.target.closest('.avatar-btn')) {
+                    const button = e.target.closest('.avatar-btn');
+                    const view = button.dataset.view;
+                    showView(view);
+                }
+            });
+
+            // Calculator logic
+            const lostClientsInput = document.getElementById('lost-clients');
+            const avgRepairInput = document.getElementById('avg-repair');
+            const lossResult = document.getElementById('loss-result');
+
+            function calculateLoss() {
+                const clients = parseFloat(lostClientsInput.value) || 0;
+                const repairCost = parseFloat(avgRepairInput.value) || 0;
+                const monthlyLoss = clients * repairCost * 4.33;
+                
+                lossResult.textContent = `$${Math.round(monthlyLoss).toLocaleString('es-CO')} COP`;
+            }
+
+            lostClientsInput.addEventListener('input', calculateLoss);
+            avgRepairInput.addEventListener('input', calculateLoss);
+
+            // Stats counter animation
+            const counters = document.querySelectorAll('.stat-counter');
+            const speed = 200;
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const updateCount = () => {
+                            const target = +counter.getAttribute('data-target');
+                            const count = +counter.innerText;
+                            const inc = target / speed;
+
+                            if (count < target) {
+                                counter.innerText = Math.ceil(count + inc);
+                                setTimeout(updateCount, 10);
+                            } else {
+                                counter.innerText = target.toLocaleString('es-CO');
+                            }
+                        };
+                        updateCount();
+                        observer.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
+
+            // Chart.js for Fleet
+            const fleetCtx = document.getElementById('fleetChart');
+            if(fleetCtx) {
+                new Chart(fleetCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Kit de Arrastre', 'Frenos', 'Baterías', 'Suspensión', 'Sistema Eléctrico'],
+                        datasets: [{
+                            label: '% de Fallas en Flotas',
+                            data: [35, 25, 18, 12, 10],
+                            backgroundColor: 'rgba(0, 119, 182, 0.6)',
+                            borderColor: 'rgba(0, 119, 182, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%'
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label}: ${context.raw}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            showView('taller');
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
