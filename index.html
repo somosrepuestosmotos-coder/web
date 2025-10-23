@@ -11,19 +11,20 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 
-  <!-- Open Graph / Social -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Somos Repuestos Motos | Confianza que Acelera tu Camino">
   <meta property="og:description" content="Más de 30 años garantizando el movimiento de talleres, flotas y motociclistas. Descubre la solución experta que necesitas.">
   <meta property="og:image" content="https://somosrepuestosmotos-coder.github.io/qkweb/android-chrome-512x512.png">
   <meta property="og:url" content="https://somosrepuestosmotos-coder.github.io/qkweb/">
   <meta property="og:type" content="website">
 
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Somos Repuestos Motos | Confianza que Acelera tu Camino">
   <meta name="twitter:description" content="Soluciones expertas para talleres, flotas y motociclistas.">
   <meta name="twitter:image" content="https://somosrepuestosmotos-coder.github.io/qkweb/android-chrome-512x512.png">
 
-  <!-- TailwindCSS & Fonts -->
+  <!-- TailwindCSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
@@ -40,22 +41,18 @@
       font-family: 'Poppins', sans-serif;
       background-color: var(--gris-fondo);
       color: var(--negro-tecnico);
-      transition: background-color 0.4s ease, color 0.4s ease;
       scroll-behavior: smooth;
-    }
-    h1, h2, h3, .font-title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
+      transition: background-color 0.4s ease, color 0.4s ease;
     }
 
-    /* HERO */
+    h1, h2, h3, .font-title { font-family: 'Montserrat', sans-serif; font-weight: 800; }
+
     .hero-bg {
-      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('freepik__the-style-is-3d-model-with-octane-render-volumetri__61153.png');
+      background-image: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('freepik__the-style-is-3d-model-with-octane-render-volumetri__61153.png');
       background-size: cover;
       background-position: center;
     }
 
-    /* NAV Links con subrayado animado */
     nav a {
       position: relative;
       color: #fff;
@@ -73,11 +70,8 @@
       transition: all 0.3s ease;
       transform: translateX(-50%);
     }
-    nav a:hover::after {
-      width: 80%;
-    }
+    nav a:hover::after { width: 80%; }
 
-    /* BOTONES con efecto brillante */
     .btn-efecto {
       position: relative;
       overflow: hidden;
@@ -97,14 +91,11 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.2), 0 0 15px rgba(230,57,70,0.3);
     }
 
-    /* Colores de botones */
     .btn-red { background-color: var(--rojo-energia); }
     .btn-red:hover { background-color: #C22F3A; }
     .btn-blue { background-color: var(--azul-confianza); }
     .btn-blue:hover { background-color: #005f90; }
 
-    /* Avatar buttons */
-    .avatar-btn { transition: all 0.3s ease; }
     .avatar-btn.active {
       background-color: var(--rojo-energia);
       color: white;
@@ -112,62 +103,26 @@
       box-shadow: 0 8px 15px rgba(230,57,70,0.4);
     }
 
-    /* Animación fade-in en secciones */
     section {
       opacity: 0;
       transform: translateY(30px);
       transition: all 0.8s ease-out;
     }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    section.visible { opacity: 1; transform: translateY(0); }
 
-    /* Brillo suave */
-    .soft-glow {
-      animation: glow 3s ease-in-out infinite alternate;
-    }
+    .soft-glow { animation: glow 3s ease-in-out infinite alternate; }
     @keyframes glow {
       from { box-shadow: 0 0 10px rgba(0,119,182,0.15); }
       to { box-shadow: 0 0 25px rgba(230,57,70,0.3); }
     }
 
-    /* Hover en contadores */
-    .stat-counter {
-      transition: color 0.3s ease;
-    }
-    .stat-counter:hover {
-      color: var(--azul-confianza);
-      text-shadow: 0 0 10px rgba(0,119,182,0.4);
-    }
-
-    /* DARK MODE */
     @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #0e0e0e;
-        color: #e2e2e2;
-      }
-      header, footer {
-        background-color: #111;
-      }
-      section.bg-white {
-        background-color: #1b1b1b;
-      }
+      body { background-color: #0e0e0e; color: #e2e2e2; }
+      header, footer { background-color: #111; }
+      section.bg-white { background-color: #1b1b1b; }
       .bg-gray-100 { background-color: #1f1f1f; }
-      .bg-gray-50 { background-color: #141414; }
-      .soft-glow {
-        animation: glowDark 3s ease-in-out infinite alternate;
-      }
-      @keyframes glowDark {
-        from { box-shadow: 0 0 10px rgba(0,119,182,0.3); }
-        to { box-shadow: 0 0 25px rgba(230,57,70,0.4); }
-      }
-      .btn-red:hover, .btn-blue:hover {
-        filter: brightness(1.2);
-      }
-      nav a::after {
-        background: linear-gradient(90deg, var(--azul-confianza), var(--rojo-energia));
-      }
+      .btn-red:hover, .btn-blue:hover { filter: brightness(1.2); }
+      nav a::after { background: linear-gradient(90deg, var(--azul-confianza), var(--rojo-energia)); }
     }
   </style>
 </head>
@@ -209,14 +164,44 @@
         </div>
 
         <div id="dynamic-content-container" class="max-w-5xl mx-auto">
+          <!-- Taller -->
           <div id="taller-content" class="content-section active">
-            <div class="bg-gray-100 p-8 rounded-xl shadow-inner soft-glow text-center">
-              <h4 class="text-3xl font-title mb-4">Soluciones para Talleres</h4>
-              <p class="text-xl text-[#E63946] mb-6">Rentabilidad, rapidez y respaldo técnico.</p>
-              <a href="#contacto" class="btn-efecto btn-red text-white font-bold py-3 px-8 rounded-lg shadow-lg">Agenda tu Sesión Estratégica</a>
+            <div class="bg-gray-100 p-8 rounded-xl shadow-inner soft-glow">
+              <h4 class="text-3xl font-title text-center mb-4">Soluciones para Talleres</h4>
+              <p class="text-xl text-center text-[#E63946] mb-6">Aumenta tu rentabilidad. No pierdas más clientes por falta de stock.</p>
+
+              <!-- Calculadora mejorada -->
+              <div class="bg-white dark:bg-[#1a1a1a] p-6 rounded-lg shadow-lg soft-glow max-w-md mx-auto">
+                <h5 class="text-xl font-semibold text-center mb-4">Calculadora de Pérdidas</h5>
+                <p class="text-sm text-center text-gray-600 dark:text-gray-400 mb-4">
+                  Descubre cuánto dinero podrías estar perdiendo al mes.
+                </p>
+
+                <div class="space-y-4">
+                  <div>
+                    <label for="lost-clients" class="block text-sm font-medium">Clientes rechazados por semana</label>
+                    <input type="number" id="lost-clients" min="0" class="w-full rounded-md border-gray-300 focus:border-[#0077B6] dark:bg-[#111] dark:text-gray-100" placeholder="Ej: 5">
+                  </div>
+                  <div>
+                    <label for="avg-repair" class="block text-sm font-medium">Costo promedio de reparación (COP)</label>
+                    <input type="number" id="avg-repair" min="0" class="w-full rounded-md border-gray-300 focus:border-[#0077B6] dark:bg-[#111] dark:text-gray-100" placeholder="Ej: 150000">
+                  </div>
+                </div>
+
+                <div class="mt-6 text-center bg-red-100 dark:bg-[#2b1f1f] p-4 rounded-lg transition-all duration-500">
+                  <p class="text-gray-700 dark:text-gray-300">Pérdida mensual estimada:</p>
+                  <p id="loss-result" class="text-2xl font-bold text-[#E63946]">$0 COP</p>
+                  <p id="loss-feedback" class="text-sm mt-2 text-gray-600 dark:text-gray-400"></p>
+                </div>
+              </div>
+
+              <div class="text-center mt-8">
+                <a href="#contacto" class="btn-efecto btn-red text-white font-bold py-3 px-8 rounded-lg shadow-lg">Agenda tu Sesión Estratégica</a>
+              </div>
             </div>
           </div>
 
+          <!-- Flota -->
           <div id="flota-content" class="content-section">
             <div class="bg-gray-100 p-8 rounded-xl shadow-inner soft-glow text-center">
               <h4 class="text-3xl font-title mb-4">Programa para Flotas</h4>
@@ -225,11 +210,18 @@
             </div>
           </div>
 
+          <!-- Particular -->
           <div id="particular-content" class="content-section">
             <div class="bg-gray-100 p-8 rounded-xl shadow-inner soft-glow text-center">
               <h4 class="text-3xl font-title mb-4">Repuestos para tu Moto</h4>
               <p class="text-xl text-[#E63946] mb-6">Calidad 100% garantizada para tu tranquilidad.</p>
-              <a href="https://somosrepuestosmotos-coder.github.io/qkweb/" target="_blank" class="btn-efecto btn-blue text-white font-bold py-3 px-8 rounded-lg shadow-lg">Ir a la Tienda Online</a>
+
+              <!-- Botón corregido -->
+              <a href="https://somosrepuestosmotos-coder.github.io/qkweb/"
+                 onclick="window.open(this.href, '_blank'); return false;"
+                 class="btn-efecto btn-blue text-white font-bold py-3 px-8 rounded-lg shadow-lg">
+                 Ir a la Tienda Online
+              </a>
             </div>
           </div>
         </div>
@@ -250,16 +242,12 @@
   </footer>
 
   <script>
-    // Animación de aparición de secciones
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.2 });
     sections.forEach(section => observer.observe(section));
 
-    // Navegación SPA
     document.addEventListener('DOMContentLoaded', () => {
       const buttons = document.querySelectorAll('.avatar-btn');
       const content = document.querySelectorAll('.content-section');
@@ -271,6 +259,32 @@
           document.getElementById(btn.dataset.view + '-content').classList.add('active');
         });
       });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const clientsInput = document.getElementById('lost-clients');
+      const repairInput = document.getElementById('avg-repair');
+      const result = document.getElementById('loss-result');
+      const feedback = document.getElementById('loss-feedback');
+
+      function calculateLoss() {
+        const clients = Math.max(0, parseFloat(clientsInput.value) || 0);
+        const cost = Math.max(0, parseFloat(repairInput.value) || 0);
+        const loss = clients * cost * 4.33;
+
+        result.textContent = `$${Math.round(loss).toLocaleString('es-CO')} COP`;
+
+        if (loss > 0) {
+          let level = "";
+          if (loss < 500000) level = "💡 Pequeña fuga, pero suma con el tiempo.";
+          else if (loss < 2000000) level = "⚙️ Pérdidas notables: revisa tu rotación de stock.";
+          else level = "🚨 Pérdida crítica: estás dejando mucho dinero sobre la mesa.";
+          feedback.textContent = level;
+        } else feedback.textContent = "";
+      }
+
+      clientsInput.addEventListener('input', calculateLoss);
+      repairInput.addEventListener('input', calculateLoss);
     });
   </script>
 </body>
