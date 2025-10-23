@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Somos Repuestos Motos | Confianza que Acelera tu Camino</title>
 
+  <!-- FAVICONS -->
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 
+  <!-- META OG/TWITTER -->
   <meta property="og:title" content="Somos Repuestos Motos | Confianza que Acelera tu Camino">
   <meta property="og:description" content="Más de 30 años de experiencia garantizando el movimiento de talleres, flotas y motociclistas. Descubre la solución experta que necesitas. Tienda de repuestos para motos | Moto cargueros | Mayorista">
   <meta property="og:image" content="https://somosrepuestosmotos-coder.github.io/qkweb/android-chrome-512x512.png">
@@ -18,18 +20,16 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Somos Repuestos Motos | Confianza que Acelera tu Camino">
-  <meta name="twitter:description" content="Más de 30 años de experiencia garantizando el movimiento de talleres, flotas y motociclistas. Descubre la solución experta que necesitas.">
+  <meta name="twitter:description" content="Más de 30 años de experiencia garantizando el movimiento de talleres, flotas y motociclistas. Descubre la solución experta que necesitas. Tienda de repuestos para motos | Moto cargueros | Mayorista">
   <meta name="twitter:image" content="https://somosrepuestosmotos-coder.github.io/qkweb/android-chrome-512x512.png">
 
+  <!-- LIBRERÍAS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f8f9fa;
-    }
+    body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; }
     h1, h2, h3, .font-title { font-family: 'Montserrat', sans-serif; font-weight: 800; }
     .hero-bg {
       background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('freepik__the-style-is-3d-model-with-octane-render-volumetri__61153.png');
@@ -41,19 +41,17 @@
       background-color: #E63946;
       color: white;
       transform: translateY(-4px);
-      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     }
     .content-section { display: none; }
     .content-section.active { display: block; }
-    .chart-container {
-      position: relative; width: 100%; max-width: 600px;
-      margin: 0 auto; height: 300px;
-    }
+    .chart-container { position: relative; width: 100%; max-width: 600px; margin: 0 auto; height: 300px; }
   </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800">
-  <!-- Header -->
+
+  <!-- HEADER -->
   <header class="bg-[#1A1A1A] text-white p-4 shadow-md sticky top-0 z-50">
     <div class="container mx-auto flex justify-between items-center">
       <a href="#" class="flex items-center">
@@ -68,154 +66,169 @@
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- HERO -->
   <section id="hero" class="hero-bg text-white">
     <div class="container mx-auto px-6 py-24 md:py-32 text-center">
-      <h2 class="text-4xl md:text-6xl font-title mb-4">Confianza que Acelera tu Camino</h2>
+      <h2 class="text-4xl md:text-6xl font-title leading-tight mb-4">Confianza que Acelera tu Camino</h2>
       <p class="text-lg md:text-xl max-w-3xl mx-auto">
-        Más de 30 años garantizando el movimiento de talleres, flotas y motociclistas.
+        Más de 30 años de experiencia garantizando el movimiento de talleres, flotas y motociclistas.  
+        Descubre la solución experta que necesitas.
       </p>
     </div>
   </section>
 
-  <!-- Soluciones -->
+  <!-- SOLUCIONES -->
   <section id="soluciones" class="py-16 md:py-20 bg-white">
     <div class="container mx-auto px-6">
       <div class="text-center mb-12">
-        <h3 class="text-3xl md:text-4xl font-title">Un Aliado para Cada Necesidad</h3>
-        <p class="mt-4 text-lg text-gray-600">Selecciona tu perfil para ver soluciones personalizadas.</p>
+        <h3 class="text-3xl md:text-4xl font-title text-[#1A1A1A]">Un Aliado para Cada Necesidad</h3>
+        <p class="mt-4 text-lg text-gray-600">Selecciona tu perfil para ver las soluciones personalizadas que tenemos para ti.</p>
       </div>
 
-      <div id="avatar-selector" class="flex flex-col md:flex-row justify-center gap-6 mb-12">
-        <button data-view="taller" class="avatar-btn active bg-gray-200 py-3 px-6 rounded-lg">🔧 Soy un Taller</button>
-        <button data-view="flota" class="avatar-btn bg-gray-200 py-3 px-6 rounded-lg">🚚 Gestiono una Flota</button>
-        <button data-view="particular" class="avatar-btn bg-gray-200 py-3 px-6 rounded-lg">🏍️ Busco Repuestos</button>
+      <!-- AVATAR SELECTOR -->
+      <div id="avatar-selector" class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 mb-12">
+        <button data-view="taller" class="avatar-btn active text-lg bg-gray-200 hover:bg-gray-300 text-[#1A1A1A] font-semibold py-4 px-8 rounded-lg shadow-md">🔧 Soy un Taller</button>
+        <button data-view="flota" class="avatar-btn text-lg bg-gray-200 hover:bg-gray-300 text-[#1A1A1A] font-semibold py-4 px-8 rounded-lg shadow-md">🚚 Gestiono una Flota</button>
+        <button data-view="particular" class="avatar-btn text-lg bg-gray-200 hover:bg-gray-300 text-[#1A1A1A] font-semibold py-4 px-8 rounded-lg shadow-md">🏍️ Busco Repuestos</button>
       </div>
 
+      <!-- CONTENIDO TALLER -->
       <div id="taller-content" class="content-section active">
         <div class="bg-gray-100 p-8 rounded-xl shadow-inner">
-          <h4 class="text-2xl font-title text-center mb-2">Soluciones para Talleres</h4>
-          <p class="text-center text-[#E63946] font-semibold mb-6">Aumenta tu rentabilidad. No pierdas más clientes por falta de stock.</p>
-          <div class="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
-            <h5 class="text-xl font-semibold text-center mb-4">Calculadora de Pérdidas</h5>
-            <p class="text-sm text-center text-gray-600 mb-4">Descubre cuánto dinero podrías estar perdiendo al mes.</p>
+          <h4 class="text-3xl font-title text-[#1A1A1A] text-center mb-2">Soluciones para Talleres</h4>
+          <p class="text-xl text-center text-[#E63946] font-semibold mb-6">Aumenta tu rentabilidad. No pierdas más clientes por falta de stock.</p>
 
-            <div class="space-y-4">
-              <div>
-                <label for="lost-clients" class="block text-sm font-medium">Clientes rechazados por semana</label>
-                <input id="lost-clients" type="number" min="0" class="mt-1 w-full border rounded-md p-2" placeholder="Ej: 5">
-              </div>
-              <div>
-                <label for="avg-repair" class="block text-sm font-medium">Costo promedio de reparación (COP)</label>
-                <input id="avg-repair" type="number" min="0" class="mt-1 w-full border rounded-md p-2" placeholder="Ej: 150000">
-              </div>
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <p class="mb-4">Nuestro sistema <strong>"Taller Siempre Listo"</strong> es más que una simple entrega de repuestos...</p>
+              <ul class="space-y-2 mb-6">
+                <li>✓ Kits de inventario predictivo.</li>
+                <li>✓ Entrega prioritaria en horas.</li>
+                <li>✓ Asesoría técnica directa.</li>
+              </ul>
             </div>
 
-            <div class="mt-6 text-center bg-red-100 p-4 rounded-lg transition-all">
-              <p class="text-gray-700">Pérdida mensual estimada:</p>
-              <p id="loss-result" class="text-2xl font-bold text-[#E63946]">$0 COP</p>
-              <p id="loss-feedback" class="text-sm mt-2 text-gray-600"></p>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+              <h5 class="text-xl font-semibold text-center mb-4">Calculadora de Pérdidas</h5>
+              <p class="text-sm text-center text-gray-600 mb-4">Descubre cuánto dinero podrías estar perdiendo al mes.</p>
+
+              <div class="space-y-4">
+                <div>
+                  <label for="lost-clients" class="block text-sm font-medium text-gray-700">Clientes rechazados por semana</label>
+                  <input type="number" id="lost-clients" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-[#0077B6]" placeholder="Ej: 5">
+                </div>
+                <div>
+                  <label for="avg-repair" class="block text-sm font-medium text-gray-700">Costo promedio de reparación (COP)</label>
+                  <input type="number" id="avg-repair" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-[#0077B6]" placeholder="Ej: 150000">
+                </div>
+              </div>
+
+              <div class="mt-6 text-center bg-red-100 p-4 rounded-lg">
+                <p class="text-gray-700">Pérdida mensual estimada:</p>
+                <p id="loss-result" class="text-2xl font-bold text-[#E63946]">$0 COP</p>
+              </div>
             </div>
+          </div>
+
+          <div class="text-center mt-8">
+            <a href="#contacto" class="bg-[#E63946] text-white font-bold py-3 px-8 rounded-lg hover:bg-red-700 transition-transform transform hover:scale-105 shadow-lg">Agenda tu Sesión Estratégica</a>
           </div>
         </div>
       </div>
 
+      <!-- CONTENIDO FLOTA -->
       <div id="flota-content" class="content-section">
-        <div class="bg-gray-100 p-8 rounded-xl shadow-inner text-center">
-          <h4 class="text-2xl font-title mb-4">Programa para Flotas</h4>
-          <p class="text-[#E63946] font-semibold mb-6">Maximiza el tiempo operativo y reduce costos de mantenimiento.</p>
-          <div class="chart-container">
-            <canvas id="fleetChart"></canvas>
+        <div class="bg-gray-100 p-8 rounded-xl shadow-inner">
+          <h4 class="text-3xl font-title text-[#1A1A1A] text-center mb-2">Programa para Flotas</h4>
+          <p class="text-xl text-center text-[#E63946] font-semibold mb-6">Maximiza el tiempo operativo y reduce costos de mantenimiento.</p>
+          <p class="text-left mb-4">Una moto detenida es una pérdida directa de ingresos...</p>
+
+          <div class="mt-8 bg-white p-6 rounded-lg shadow-lg">
+            <h5 class="text-xl font-semibold text-center mb-4">Visión Data-Driven</h5>
+            <div class="chart-container"><canvas id="fleetChart"></canvas></div>
+          </div>
+
+          <div class="text-center mt-8">
+            <a href="#contacto" class="bg-[#E63946] text-white font-bold py-3 px-8 rounded-lg hover:bg-red-700 transition-transform transform hover:scale-105 shadow-lg">Solicita un Análisis de Flota Gratuito</a>
           </div>
         </div>
       </div>
 
+      <!-- CONTENIDO PARTICULAR -->
       <div id="particular-content" class="content-section">
-        <div class="bg-gray-100 p-8 rounded-xl shadow-inner text-center">
-          <h4 class="text-2xl font-title mb-4">Repuestos para tu Moto</h4>
-          <p class="text-[#E63946] font-semibold mb-6">Calidad 100% garantizada para tu tranquilidad.</p>
-          <a href="https://somosrepuestosmotos-coder.github.io/qkweb/"
-             onclick="window.open(this.href, '_blank'); return false;"
-             class="bg-[#0077B6] text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-800 shadow-lg transition-transform transform hover:scale-105 inline-block">
-             Ir a la Tienda Online
-          </a>
+        <div class="bg-gray-100 p-8 rounded-xl shadow-inner">
+          <h4 class="text-3xl font-title text-[#1A1A1A] text-center mb-2">Repuestos para tu Moto</h4>
+          <p class="text-xl text-center text-[#E63946] font-semibold mb-6">Conduce con tranquilidad. Repuestos de calidad 100% garantizada.</p>
+          <p class="text-center max-w-3xl mx-auto mb-8">Sabemos que tu moto es más que un vehículo...</p>
+
+          <div class="text-center mt-8">
+            <a href="https://somosrepuestosmotos-coder.github.io/qkweb/"
+               target="_blank"
+               class="bg-[#0077B6] text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-800 transition-transform transform hover:scale-105 shadow-lg">
+               Ir a la Tienda Online
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contacto -->
-  <section id="contacto" class="py-16 bg-[#1A1A1A] text-white text-center">
-    <h3 class="text-3xl font-title mb-4">¿Listo para Acelerar?</h3>
-    <p class="text-lg mb-8">Contáctanos y recibe asesoría inmediata.</p>
-    <a href="https://wa.me/573001727754?text=Hola,%20necesito%20asesoría%20con%20repuestos." target="_blank"
-       class="bg-[#25D366] text-white font-bold py-4 px-8 rounded-lg hover:bg-green-600 transition-transform transform hover:scale-105 shadow-lg">
+  <!-- CONTACTO -->
+  <section id="contacto" class="py-16 md:py-20 bg-[#1A1A1A] text-white text-center">
+    <h3 class="text-3xl md:text-4xl font-title mb-4">¿Listo para Acelerar?</h3>
+    <p class="text-lg max-w-2xl mx-auto mb-8">Nuestro equipo de expertos está listo para darte una solución inmediata.</p>
+    <a href="https://wa.me/573001727754?text=Hola,%20necesito%20asesoría%20con%20repuestos."
+       target="_blank"
+       class="bg-[#25D366] text-white font-bold py-4 px-8 rounded-lg hover:bg-green-600 transition-transform transform hover:scale-105 shadow-lg text-xl">
        ✆ Hablar por WhatsApp
     </a>
   </section>
 
-  <footer class="bg-gray-900 text-gray-400 text-center py-8">
+  <footer class="bg-gray-900 text-gray-400 py-8 text-center">
     <p>&copy; 2025 Somos Repuestos Motos. Todos los derechos reservados.</p>
   </footer>
 
   <script>
-    // Cambio de vistas SPA
-    const buttons = document.querySelectorAll('.avatar-btn');
-    const sections = document.querySelectorAll('.content-section');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
-        sections.forEach(s => s.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.view + '-content').classList.add('active');
+    document.addEventListener('DOMContentLoaded', () => {
+      // Selector SPA
+      const avatarSelector = document.getElementById('avatar-selector');
+      const contentSections = document.querySelectorAll('.content-section');
+      const buttons = avatarSelector.querySelectorAll('.avatar-btn');
+
+      avatarSelector.addEventListener('click', e => {
+        const btn = e.target.closest('.avatar-btn');
+        if (!btn) return;
+        const view = btn.dataset.view;
+        buttons.forEach(b => b.classList.toggle('active', b === btn));
+        contentSections.forEach(sec => sec.classList.toggle('active', sec.id === `${view}-content`));
       });
-    });
 
-    // Calculadora de Pérdidas mejorada
-    const clientsInput = document.getElementById('lost-clients');
-    const repairInput = document.getElementById('avg-repair');
-    const result = document.getElementById('loss-result');
-    const feedback = document.getElementById('loss-feedback');
+      // Calculadora
+      const lost = document.getElementById('lost-clients');
+      const avg = document.getElementById('avg-repair');
+      const res = document.getElementById('loss-result');
+      const calc = () => {
+        const c = parseFloat(lost.value) || 0;
+        const r = parseFloat(avg.value) || 0;
+        const loss = c * r * 4.33;
+        res.textContent = `$${Math.round(loss).toLocaleString('es-CO')} COP`;
+      };
+      lost.addEventListener('input', calc);
+      avg.addEventListener('input', calc);
 
-    function calculateLoss() {
-      const clients = Math.max(0, parseFloat(clientsInput.value) || 0);
-      const cost = Math.max(0, parseFloat(repairInput.value) || 0);
-      const loss = clients * cost * 4.33;
-      result.textContent = `$${Math.round(loss).toLocaleString('es-CO')} COP`;
-      if (loss > 0) {
-        let msg = "";
-        if (loss < 500000) msg = "💡 Pequeña fuga, pero suma con el tiempo.";
-        else if (loss < 2000000) msg = "⚙️ Pérdidas notables: revisa tu rotación de stock.";
-        else msg = "🚨 Pérdida crítica: estás dejando mucho dinero sobre la mesa.";
-        feedback.textContent = msg;
-      } else feedback.textContent = "";
-    }
-    clientsInput.addEventListener('input', calculateLoss);
-    repairInput.addEventListener('input', calculateLoss);
-
-    // Gráfico de flotas
-    const fleetCtx = document.getElementById('fleetChart');
-    if (fleetCtx) {
-      new Chart(fleetCtx, {
+      // Chart flota
+      const ctx = document.getElementById('fleetChart');
+      if (ctx) new Chart(ctx, {
         type: 'bar',
         data: {
           labels: ['Kit de Arrastre', 'Frenos', 'Baterías', 'Suspensión', 'Sistema Eléctrico'],
-          datasets: [{
-            label: '% de Fallas',
-            data: [35, 25, 18, 12, 10],
-            backgroundColor: 'rgba(0,119,182,0.6)',
-            borderColor: 'rgba(0,119,182,1)',
-            borderWidth: 1
-          }]
+          datasets: [{ label: '% de Fallas', data: [35,25,18,12,10],
+            backgroundColor: 'rgba(0,119,182,0.6)', borderColor: 'rgba(0,119,182,1)', borderWidth: 1 }]
         },
-        options: {
-          responsive: true,
-          indexAxis: 'y',
-          scales: { x: { beginAtZero: true, ticks: { callback: v => v + '%' } } },
-          plugins: { legend: { display: false } }
-        }
+        options: { indexAxis: 'y', plugins: { legend: { display: false } },
+          scales: { x: { beginAtZero: true, ticks: { callback: v => v+'%' } } } }
       });
-    }
+    });
   </script>
 </body>
 </html>
