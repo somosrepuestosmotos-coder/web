@@ -222,7 +222,8 @@
 /* 🌐 Autoajuste de API: local o Render */
 const API_URL = window.location.hostname.includes("localhost")
   ? "http://localhost:10000/api/empresas"
-  : "https://srm-backend-qk-lwid.onrender.com/api/empresas";
+  : "https://srm-backend-web.onrender.com/api/empresas";
+
 
 const sessionId = localStorage.getItem("srm_session") || `SRM-${Date.now()}-${Math.random().toString(36).substr(2,6)}`;
 localStorage.setItem("srm_session", sessionId);
