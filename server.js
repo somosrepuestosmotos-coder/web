@@ -35,6 +35,7 @@ if (!dbUrl) {
   process.exit(1);
 }
 
+// 🔐 Configuración SSL (solo en Render)
 const sslConfig =
   dbUrl.includes("localhost") || dbUrl.includes("127.0.0.1")
     ? false
@@ -94,9 +95,10 @@ if (existsSync(publicPath)) {
   app.use(express.static(publicPath));
   console.log(`🧭 Frontend servido desde: ${publicPath}`);
 } else {
-  console.warn("⚠️  No se encontró la carpeta de archivos estáticos");
+  console.warn("⚠️  No se encontró la carpeta de archivos estáticos.");
 }
 
+// Página principal
 app.get("/", (req, res) => {
   res.sendFile(path.join(publicPath, "dashboard.html"));
 });
@@ -141,22 +143,11 @@ app.post("/api/empresas", async (req, res) => {
       return res.status(400).json({ success: false, message: "Datos incompletos" });
     }
 
-    const query = `
-      INSERT INTO empresas (session_id, nombre, correo, whatsapp, tipo_empresa, herramientas, meta_6m, area_critica, empleados)
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
-    `;
-
-    await pool.query(query, [
-      session_id,
-      nombre,
-      correo,
-      whatsapp,
-      tipo_empresa,
-      herramientas,
-      meta_6m,
-      area_critica,
-      empleados,
-    ]);
+    await pool.query(
+      `INSERT INTO empresas (session_id, nombre, correo, whatsapp, tipo_empresa, herramientas, meta_6m, area_critica, empleados)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+      [session_id, nombre, correo, whatsapp, tipo_empresa, herramientas, meta_6m, area_critica, empleados]
+    );
 
     console.log(`✅ Empresa registrada: ${nombre} (${tipo_empresa || "sin tipo"})`);
     res.status(201).json({ success: true, message: "Empresa guardada correctamente" });
@@ -170,10 +161,8 @@ app.post("/api/empresas", async (req, res) => {
 app.delete("/api/limpiar", async (req, res) => {
   try {
     const { key } = req.body;
-
-    if (key !== ADMIN_KEY) {
+    if (key !== ADMIN_KEY)
       return res.status(403).json({ success: false, error: "Clave incorrecta" });
-    }
 
     await pool.query("TRUNCATE TABLE empresas RESTART IDENTITY");
     console.log("🗑️  Base de datos 'empresas' vaciada por administrador.");
