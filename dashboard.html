@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📊 Dashboard Diagnóstico Empresarial SRM</title>
+
+  <!-- ✅ FAVICONS -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <!-- ✅ META Open Graph / Twitter -->
+  <meta property="og:title" content="📊 Dashboard Diagnóstico Empresarial SRM" />
+  <meta property="og:description" content="Consulta y gestiona los resultados del diagnóstico empresarial SRM en tiempo real." />
+  <meta property="og:image" content="https://tudominio.com/android-chrome-512x512.png" />
+  <meta property="og:url" content="https://tudominio.com/dashboard.html" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="📊 Dashboard Diagnóstico Empresarial SRM" />
+  <meta name="twitter:description" content="Consulta y gestiona los resultados del diagnóstico empresarial SRM en tiempo real." />
+  <meta name="twitter:image" content="https://tudominio.com/android-chrome-512x512.png" />
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f0f4ff, #eaf7ff);
+      color: #1a1a1a;
+      margin: 0;
+      padding: 0;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: #0a2f7b;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 1.4rem;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem 2rem;
+      overflow-x: auto;
+      transition: background 0.3s;
+    }
+
+    h2 {
+      color: #0a2f7b;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
+
+    th, td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e0e6f1;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    th {
+      background: #0a2f7b;
+      color: white;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+    }
+
+    tr:hover {
+      background: #f5f9ff;
+      transition: background 0.2s ease-in;
+    }
+
+    .acciones {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      padding: 0.7rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-refresh { background: #00b6c8; color: white; }
+    .btn-refresh:hover { background: #0897a8; }
+
+    .btn-clear { background: #f44336; color: white; }
+    .btn-clear:hover { background: #d32f2f; }
+
+    .btn-export { background: #4caf50; color: white; }
+    .btn-export:hover { background: #3e8e41; }
+
+    .btn-theme { background: #222; color: white; }
+    .btn-theme:hover { background: #555; }
+
+    .filtro {
+      display: block;
+      margin: 1rem auto 1.5rem;
+      max-width: 300px;
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    .status {
+      text-align: center;
+      font-weight: 500;
+      color: #444;
+      margin-bottom: 1rem;
+    }
+
+    /* 🌙 Modo oscuro */
+    body.dark {
+      background: #1a1a1a;
+      color: #f2f2f2;
+    }
+
+    body.dark main { background: #2a2a2a; }
+    body.dark table th { background: #00b6c8; }
+    body.dark tr:hover { background: #333; }
+    body.dark input, body.dark button { color: #f2f2f2; }
+
+    @media (max-width: 800px) {
+      table, th, td { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>📊 Diagnóstico Empresarial SRM — Panel Global</header>
+
+  <main>
+    <h2>Empresas Registradas</h2>
+
+    <div class="acciones">
+      <button class="btn-refresh" id="btnCargar">🔄 Actualizar</button>
+      <button class="btn-export" id="btnExportar">📤 Exportar Excel</button>
+      <button class="btn-theme" id="btnTema">🌞 / 🌙</button>
+      <button class="btn-clear" id="btnLimpiar">🗑️ Limpiar Todo</button>
+    </div>
+
+    <input type="text" id="busqueda" class="filtro" placeholder="🔍 Buscar por nombre, correo, empresa..." />
+
+    <div class="status" id="estado">Cargando información...</div>
+
+    <table id="tablaEmpresas">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Fecha</th>
+          <th>Identificador</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>WhatsApp</th>
+          <th>Tipo Empresa</th>
+          <th>Herramientas</th>
+          <th>Meta 6M</th>
+          <th>Área Crítica</th>
+          <th>Empleados</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+
+  <script>
+    const API_URL = window.location.origin + "/api/empresas";
+    const ADMIN_KEY = "SRM2025ADMIN";
+    let datosGlobal = [];
+
+    async function cargarDatos() {
+      const estado = document.getElementById("estado");
+      const tbody = document.querySelector("#tablaEmpresas tbody");
+      estado.textContent = "Cargando información desde el servidor...";
+      tbody.innerHTML = "";
+
+      try {
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error("Error HTTP");
+        const data = await res.json();
+        datosGlobal = data;
+
+        if (data.length === 0) {
+          estado.textContent = "⚠️ No hay registros disponibles.";
+          return;
+        }
+
+        estado.textContent = `✅ ${data.length} empresas registradas`;
+        renderTabla(data);
+      } catch (err) {
+        console.error("❌ Error al cargar datos:", err);
+        estado.textContent = "⚠️ No se pudieron cargar los datos del servidor.";
+      }
+    }
+
+    function renderTabla(data) {
+      const tbody = document.querySelector("#tablaEmpresas tbody");
+      tbody.innerHTML = "";
+      data.forEach((emp, i) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${i + 1}</td>
+          <td>${new Date(emp.fecha).toLocaleString("es-CO")}</td>
+          <td>${emp.session_id || "-"}</td>
+          <td>${emp.nombre || "-"}</td>
+          <td>${emp.correo || "-"}</td>
+          <td>${emp.whatsapp || "-"}</td>
+          <td>${emp.tipo_empresa || "-"}</td>
+          <td>${emp.herramientas || "-"}</td>
+          <td>${emp.meta_6m || "-"}</td>
+          <td>${emp.area_critica || "-"}</td>
+          <td>${emp.empleados || "-"}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // 🔍 Filtro en tiempo real
+    document.getElementById("busqueda").addEventListener("input", (e) => {
+      const filtro = e.target.value.toLowerCase();
+      const filtrados = datosGlobal.filter(emp =>
+        Object.values(emp).some(val => String(val).toLowerCase().includes(filtro))
+      );
+      renderTabla(filtrados);
+      document.getElementById("estado").textContent =
+        `Mostrando ${filtrados.length} de ${datosGlobal.length} registros`;
+    });
+
+    // 📤 Exportar a Excel (CSV)
+    document.getElementById("btnExportar").addEventListener("click", () => {
+      if (datosGlobal.length === 0) {
+        alert("No hay datos para exportar");
+        return;
+      }
+      const encabezados = [
+        "Fecha","Identificador","Nombre","Correo","WhatsApp",
+        "Tipo Empresa","Herramientas","Meta 6M","Área Crítica","Empleados"
+      ];
+      const filas = datosGlobal.map(emp => [
+        new Date(emp.fecha).toLocaleString("es-CO"),
+        emp.session_id || "",
+        emp.nombre || "",
+        emp.correo || "",
+        emp.whatsapp || "",
+        emp.tipo_empresa || "",
+        emp.herramientas || "",
+        emp.meta_6m || "",
+        emp.area_critica || "",
+        emp.empleados || ""
+      ]);
+
+      let csv = encabezados.join(",") + "\n";
+      filas.forEach(f => csv += f.map(v => `"${v}"`).join(",") + "\n");
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `empresas_SRM_${new Date().toISOString().slice(0,10)}.csv`;
+      link.click();
+    });
+
+    // 🌙 Cambiar tema
+    const btnTema = document.getElementById("btnTema");
+    const cuerpo = document.body;
+    if (localStorage.getItem("tema") === "oscuro") cuerpo.classList.add("dark");
+
+    btnTema.addEventListener("click", () => {
+      cuerpo.classList.toggle("dark");
+      localStorage.setItem("tema", cuerpo.classList.contains("dark") ? "oscuro" : "claro");
+    });
+
+    // 🗑️ Limpiar base de datos
+    async function limpiarDatos() {
+      const clave = prompt("Introduce la clave de administrador para limpiar:");
+      if (clave !== ADMIN_KEY) return alert("Clave incorrecta ❌");
+      if (!confirm("¿Seguro que deseas borrar todos los registros? ⚠️")) return;
+
+      try {
+        const res = await fetch(window.location.origin + "/api/limpiar", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ key: ADMIN_KEY }),
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert("✅ Base de datos vaciada correctamente.");
+          cargarDatos();
+        } else {
+          alert("❌ Error: " + data.error);
+        }
+      } catch (err) {
+        console.error("❌ Error al limpiar:", err);
+        alert("Error al conectar con el servidor.");
+      }
+    }
+
+    document.getElementById("btnCargar").addEventListener("click", cargarDatos);
+    document.getElementById("btnLimpiar").addEventListener("click", limpiarDatos);
+
+    cargarDatos(); // Carga inicial
+  </script>
+</body>
+</html>

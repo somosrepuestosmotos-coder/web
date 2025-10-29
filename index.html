@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>  
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -430,6 +430,246 @@
             showView('taller');
         });
     </script>
+
+<!-- === 🔘 BOTÓN FLOTANTE: Diagnóstico SRM mejorado === -->
+<style>
+  /* 🔘 Botón flotante circular */
+  #btn-diagnostico-srm {
+    position: fixed;
+    bottom: 26px;
+    right: 26px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0A2F7B, #00B6C8);
+    color: #fff;
+    font-size: 28px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    z-index: 9999;
+  }
+  #btn-diagnostico-srm:hover {
+    transform: scale(1.08) rotate(6deg);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  /* 💬 Tooltip */
+  #texto-diagnostico-srm {
+    position: fixed;
+    bottom: 38px;
+    right: 100px;
+    background: #0A2F7B;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateX(20px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 9998;
+    white-space: nowrap;
+  }
+  #btn-diagnostico-srm:hover + #texto-diagnostico-srm {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* 🪟 Fondo del modal */
+  #modal-diagnostico-srm {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+    justify-content: flex-end;
+    transition: opacity 0.3s ease;
+  }
+
+  /* 📱 Contenedor lateral */
+  .modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 750px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
+    border-radius: 10px 0 0 10px;
+    overflow: hidden;
+    transform: translateX(100%);
+    animation: slideOut 0.4s forwards;
+  }
+
+  /* 🔵 Encabezado */
+  .modal-header {
+    background: linear-gradient(135deg, #0A2F7B, #0077B6);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  /* ❌ Botón cerrar */
+  #cerrar-modal-srm {
+    background: #E63946;
+    border: none;
+    color: #fff;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  #cerrar-modal-srm:hover {
+    background: #c92a2a;
+    transform: scale(1.1);
+  }
+
+  /* iframe del cuestionario */
+  #iframe-srm {
+    width: 100%;
+    height: calc(100vh - 64px);
+    border: none;
+  }
+
+  /* 🎞 Animaciones */
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+  }
+
+  /* 📲 Móvil */
+  @media (max-width: 640px) {
+    #btn-diagnostico-srm {
+      width: 56px;
+      height: 56px;
+      bottom: 18px;
+      right: 18px;
+      font-size: 24px;
+    }
+    #texto-diagnostico-srm {
+      display: none;
+    }
+    .modal-content {
+      width: 100%;
+      height: 100vh;
+      border-radius: 0;
+      max-width: none;
+      animation: slideIn 0.3s forwards;
+    }
+    .modal-header {
+      font-size: 16px;
+      padding: 12px 14px;
+    }
+    #cerrar-modal-srm {
+      width: 36px;
+      height: 36px;
+      font-size: 18px;
+    }
+  }
+</style>
+
+<!-- Botón flotante -->
+<button id="btn-diagnostico-srm" title="Diagnóstico SRM">🧩</button>
+<div id="texto-diagnostico-srm">Diagnóstico SRM</div>
+
+<!-- Modal lateral -->
+<div id="modal-diagnostico-srm" aria-hidden="true">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span>🧩 Diagnóstico SRM</span>
+      <button id="cerrar-modal-srm" aria-label="Cerrar diagnóstico">×</button>
+    </div>
+    <!-- ✅ Inserta aquí tu cuestionario SRM -->
+    <iframe id="iframe-srm" src="cuestionario_srm.html" title="Cuestionario Diagnóstico SRM"></iframe>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('modal-diagnostico-srm');
+  const content = document.querySelector('.modal-content');
+
+  function abrirModal() {
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+    content.style.animation = 'slideIn 0.4s forwards';
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Habilitar los botones del cuestionario
+  document.querySelectorAll('a[href="#contacto"]').forEach(a => {
+    if (
+      a.textContent.includes('Agenda tu Sesión Estratégica') ||
+      a.textContent.includes('Solicita un Análisis de Flota Gratuito')
+    ) {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        abrirModal();
+      });
+    }
+  });
+});
+</script>
+
+<script>
+(() => {
+  const btn = document.getElementById("btn-diagnostico-srm");
+  const modal = document.getElementById("modal-diagnostico-srm");
+  const cerrar = document.getElementById("cerrar-modal-srm");
+  const content = document.querySelector(".modal-content");
+
+  btn.addEventListener("click", () => {
+    modal.style.display = "flex";
+    modal.setAttribute("aria-hidden", "false");
+    content.style.animation = "slideIn 0.4s forwards";
+    document.body.style.overflow = "hidden";
+  });
+
+  const cerrarModal = () => {
+    content.style.animation = "slideOut 0.4s forwards";
+    setTimeout(() => {
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "auto";
+    }, 400);
+  };
+
+  cerrar.addEventListener("click", cerrarModal);
+  modal.addEventListener("click", e => {
+    if (e.target === modal) cerrarModal();
+  });
+
+  // ✅ Accesibilidad: ESC para cerrar
+  window.addEventListener("keydown", e => {
+    if (e.key === "Escape" && modal.style.display === "flex") cerrarModal();
+  });
+})();
+</script>
+<!-- === /BOTÓN FLOTANTE === -->
+
+
 
 </body>
 </html>
