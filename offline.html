@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⚠️ Sin conexión - SRM Diagnóstico Empresarial</title>
+
+  <!-- ✅ FAVICONS -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #0a2f7b, #00b6c8);
+      color: white;
+      text-align: center;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .contenedor {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      max-width: 420px;
+      margin: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.7s ease;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+      color: #fff;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #e0f7fa;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    img {
+      width: 100px;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+    }
+
+    button {
+      background: white;
+      color: #0a2f7b;
+      border: none;
+      border-radius: 8px;
+      padding: 0.8rem 1.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background: #00b6c8;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <img src="android-chrome-192x192.png" alt="Logo SRM">
+    <h1>🔌 Sin conexión</h1>
+    <p>
+      No tienes conexión a Internet en este momento.<br />
+      Puedes seguir navegando por las partes guardadas del sistema SRM.<br />
+      Cuando vuelvas a conectarte, los datos se sincronizarán automáticamente.
+    </p>
+    <button onclick="window.location.reload()">🔄 Reintentar conexión</button>
+  </div>
+
+  <footer>SRM Diagnóstico Empresarial © 2025</footer>
+</body>
+</html>

@@ -15,13 +15,13 @@
   <!-- ✅ META Open Graph / Twitter -->
   <meta property="og:title" content="📊 Dashboard Diagnóstico Empresarial SRM" />
   <meta property="og:description" content="Consulta y gestiona los resultados del diagnóstico empresarial SRM en tiempo real." />
-  <meta property="og:image" content="https://tudominio.com/android-chrome-512x512.png" />
-  <meta property="og:url" content="https://tudominio.com/dashboard.html" />
+  <meta property="og:image" content="https://srm-backend-web.onrender.com/android-chrome-512x512.png" />
+  <meta property="og:url" content="https://srm-backend-web.onrender.com/dashboard.html" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="📊 Dashboard Diagnóstico Empresarial SRM" />
   <meta name="twitter:description" content="Consulta y gestiona los resultados del diagnóstico empresarial SRM en tiempo real." />
-  <meta name="twitter:image" content="https://tudominio.com/android-chrome-512x512.png" />
+  <meta name="twitter:image" content="https://srm-backend-web.onrender.com/android-chrome-512x512.png" />
 
   <style>
     body {
@@ -237,7 +237,6 @@
       });
     }
 
-    // 🔍 Filtro en tiempo real
     document.getElementById("busqueda").addEventListener("input", (e) => {
       const filtro = e.target.value.toLowerCase();
       const filtrados = datosGlobal.filter(emp =>
@@ -248,7 +247,6 @@
         `Mostrando ${filtrados.length} de ${datosGlobal.length} registros`;
     });
 
-    // 📤 Exportar a Excel (CSV)
     document.getElementById("btnExportar").addEventListener("click", () => {
       if (datosGlobal.length === 0) {
         alert("No hay datos para exportar");
@@ -281,17 +279,14 @@
       link.click();
     });
 
-    // 🌙 Cambiar tema
     const btnTema = document.getElementById("btnTema");
     const cuerpo = document.body;
     if (localStorage.getItem("tema") === "oscuro") cuerpo.classList.add("dark");
-
     btnTema.addEventListener("click", () => {
       cuerpo.classList.toggle("dark");
       localStorage.setItem("tema", cuerpo.classList.contains("dark") ? "oscuro" : "claro");
     });
 
-    // 🗑️ Limpiar base de datos
     async function limpiarDatos() {
       const clave = prompt("Introduce la clave de administrador para limpiar:");
       if (clave !== ADMIN_KEY) return alert("Clave incorrecta ❌");
@@ -319,7 +314,16 @@
     document.getElementById("btnCargar").addEventListener("click", cargarDatos);
     document.getElementById("btnLimpiar").addEventListener("click", limpiarDatos);
 
-    cargarDatos(); // Carga inicial
+    cargarDatos();
   </script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then(() => console.log("✅ Service Worker SRM registrado correctamente"))
+      .catch(err => console.error("❌ Error al registrar SW:", err));
+  }
+</script>
+
 </body>
 </html>

@@ -668,6 +668,14 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 <!-- === /BOTÓN FLOTANTE === -->
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then(() => console.log("✅ Service Worker SRM registrado correctamente"))
+      .catch(err => console.error("❌ Error al registrar SW:", err));
+  }
+</script>
 
 
 

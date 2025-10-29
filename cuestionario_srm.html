@@ -1,320 +1,313 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diagnóstico Empresarial SRM</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔍 Diagnóstico Empresarial SRM</title>
 
-<!-- ✅ FAVICONS -->
-<link rel="icon" type="image/x-icon" href="favicon.ico" />
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-<link rel="manifest" href="site.webmanifest" />
+  <!-- ✅ FAVICONS -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
 
-<style>
-  body {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    background: linear-gradient(135deg, #f5f7fb, #e3edf9);
-    color: #222;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
+  <!-- ✅ META Open Graph / Twitter -->
+  <meta property="og:title" content="🔍 Diagnóstico Empresarial SRM" />
+  <meta property="og:description" content="Descubre cómo potenciar tu negocio de motos o motocarros con el diagnóstico empresarial SRM." />
+  <meta property="og:image" content="https://srm-backend-web.onrender.com/android-chrome-512x512.png" />
+  <meta property="og:url" content="https://srm-backend-web.onrender.com/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="🔍 Diagnóstico Empresarial SRM" />
+  <meta name="twitter:description" content="Descubre cómo potenciar tu negocio de motos o motocarros con el diagnóstico empresarial SRM." />
+  <meta name="twitter:image" content="https://srm-backend-web.onrender.com/android-chrome-512x512.png" />
 
-  main {
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    max-width: 480px;
-    width: 90%;
-    padding: 1.8rem;
-    text-align: center;
-    animation: fadeIn 0.6s ease;
-  }
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f5f7fb, #e3edf9);
+      color: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.97); }
-    to { opacity: 1; transform: scale(1); }
-  }
+    main {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      max-width: 480px;
+      width: 90%;
+      padding: 1.8rem;
+      text-align: center;
+      animation: fadeIn 0.6s ease;
+    }
 
-  h1 {
-    color: #0A2F7B;
-    font-size: 1.4rem;
-    margin-bottom: 0.8rem;
-  }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.97); }
+      to { opacity: 1; transform: scale(1); }
+    }
 
-  p.intro {
-    color: #444;
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
+    h1 {
+      color: #0A2F7B;
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
 
-  label {
-    display: block;
-    text-align: left;
-    font-weight: 600;
-    color: #0A2F7B;
-    margin: 1rem 0 0.4rem;
-  }
+    p.intro {
+      color: #444;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
 
-  input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #cfd6e4;
-    border-radius: 8px;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  }
+    label {
+      display: block;
+      text-align: left;
+      font-weight: 600;
+      color: #0A2F7B;
+      margin: 1rem 0 0.4rem;
+    }
 
-  input:focus {
-    border-color: #00B6C8;
-    box-shadow: 0 0 0 3px rgba(0,182,200,0.15);
-  }
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #cfd6e4;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
 
-  .opciones {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 0.6rem;
-  }
+    input:focus {
+      border-color: #00B6C8;
+      box-shadow: 0 0 0 3px rgba(0,182,200,0.15);
+    }
 
-  .opciones button {
-    border: 1px solid #ccd3e0;
-    border-radius: 10px;
-    padding: 0.8rem;
-    background: #f8f9fa;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    font-size: 1rem;
-  }
+    .opciones {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+    }
 
-  .opciones button:hover {
-    background: #e0f7fa;
-    border-color: #00B6C8;
-  }
+    .opciones button {
+      border: 1px solid #ccd3e0;
+      border-radius: 10px;
+      padding: 0.8rem;
+      background: #f8f9fa;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-size: 1rem;
+    }
 
-  .activo {
-    background: #00B6C8 !important;
-    color: white !important;
-    border-color: #00B6C8 !important;
-  }
+    .opciones button:hover {
+      background: #e0f7fa;
+      border-color: #00B6C8;
+    }
 
-  .btn {
-    width: 100%;
-    background: #0A2F7B;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 0.9rem;
-    margin-top: 1.2rem;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
+    .activo {
+      background: #00B6C8 !important;
+      color: white !important;
+      border-color: #00B6C8 !important;
+    }
 
-  .btn:hover { background: #00B6C8; }
+    .btn {
+      width: 100%;
+      background: #0A2F7B;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 0.9rem;
+      margin-top: 1.2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
 
-  #final {
-    display: none;
-    color: #0A2F7B;
-    font-size: 1.1rem;
-    margin-top: 1.2rem;
-    animation: fadeIn 0.4s ease;
-  }
+    .btn:hover { background: #00B6C8; }
 
-  @keyframes toastIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+    #final {
+      display: none;
+      color: #0A2F7B;
+      font-size: 1.1rem;
+      margin-top: 1.2rem;
+      animation: fadeIn 0.4s ease;
+    }
 
-  @keyframes spin { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
-</style>
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-<main>
-  <h1>🔍 Diagnóstico Empresarial SRM</h1>
-  <p class="intro">Descubre en pocos pasos cómo potenciar tu negocio de motos | motocarros y multiplicar tus resultados.</p>
+  <main>
+    <h1>🔍 Diagnóstico Empresarial SRM</h1>
+    <p class="intro">Descubre en pocos pasos cómo potenciar tu negocio de motos | motocarros y multiplicar tus resultados.</p>
 
-  <!-- 1️⃣ Datos personales -->
-  <div id="pregunta1">
-    <label>Tu nombre completo</label>
-    <input type="text" id="nombre" required>
+    <!-- 1️⃣ Datos personales -->
+    <div id="pregunta1">
+      <label>Tu nombre completo</label>
+      <input type="text" id="nombre" required>
 
-    <label>Correo electrónico</label>
-    <input type="email" id="correo" required>
+      <label>Correo electrónico</label>
+      <input type="email" id="correo" required>
 
-    <label>WhatsApp</label>
-    <input type="tel" id="whatsapp" required>
+      <label>WhatsApp</label>
+      <input type="tel" id="whatsapp" required>
 
-    <button id="btnContinuar" class="btn">Comenzar diagnóstico 🚀</button>
-  </div>
-
-  <!-- 2️⃣ Tipo de empresa -->
-  <div id="pregunta2" style="display:none;">
-    <label>¿Qué describe mejor tu empresa?</label>
-    <div class="opciones">
-      <button data-value="Taller">Soy un taller que busca crecer y destacarse</button>
-      <button data-value="Flota">Gestiono una flota y quiero optimizar costos</button>
-      <button data-value="Mayorista">Soy mayorista y quiero ampliar mi mercado</button>
+      <button id="btnContinuar" class="btn">Comenzar diagnóstico 🚀</button>
     </div>
-  </div>
 
-  <!-- 3️⃣ Empleados -->
-  <div id="pregunta3" style="display:none;">
-    <label>¿Cuántas personas forman tu equipo actualmente?</label>
-    <div class="opciones">
-      <button data-value="1-5">1 a 5 empleados</button>
-      <button data-value="6-20">6 a 20 empleados</button>
-      <button data-value="21-50">21 a 50 empleados</button>
-      <button data-value="51-100">51 a 100 empleados</button>
-      <button data-value="Más de 100">Más de 100 empleados</button>
+    <!-- 2️⃣ Tipo de empresa -->
+    <div id="pregunta2" style="display:none;">
+      <label>¿Qué describe mejor tu empresa?</label>
+      <div class="opciones">
+        <button data-value="Taller">Soy un taller que busca crecer y destacarse</button>
+        <button data-value="Flota">Gestiono una flota y quiero optimizar costos</button>
+        <button data-value="Mayorista">Soy mayorista y quiero ampliar mi mercado</button>
+      </div>
     </div>
-  </div>
 
-  <!-- 4️⃣ Área crítica -->
-  <div id="pregunta4" style="display:none;">
-    <label>¿En qué área sientes que necesitas más apoyo?</label>
-    <div class="opciones">
-      <button data-value="Ventas y Clientes">Atraer y fidelizar más clientes</button>
-      <button data-value="Inventario y Logística">Controlar y optimizar inventarios</button>
-      <button data-value="Finanzas y Costos">Tener claridad y rentabilidad financiera</button>
+    <!-- 3️⃣ Empleados -->
+    <div id="pregunta3" style="display:none;">
+      <label>¿Cuántas personas forman tu equipo actualmente?</label>
+      <div class="opciones">
+        <button data-value="1-5">1 a 5 empleados</button>
+        <button data-value="6-20">6 a 20 empleados</button>
+        <button data-value="21-50">21 a 50 empleados</button>
+        <button data-value="51-100">51 a 100 empleados</button>
+        <button data-value="Más de 100">Más de 100 empleados</button>
+      </div>
     </div>
-  </div>
 
-  <!-- 5️⃣ Meta -->
-  <div id="pregunta5" style="display:none;">
-    <label>¿Cuál es tu meta más importante en los próximos 6 meses?</label>
-    <div class="opciones">
-      <button data-value="Aumentar ventas">Aumentar ventas y presencia en el mercado</button>
-      <button data-value="Reducir costos">Reducir costos sin perder calidad</button>
-      <button data-value="Digitalización de procesos">Digitalizar mi negocio para ganar tiempo</button>
+    <!-- 4️⃣ Área crítica -->
+    <div id="pregunta4" style="display:none;">
+      <label>¿En qué área sientes que necesitas más apoyo?</label>
+      <div class="opciones">
+        <button data-value="Ventas y Clientes">Atraer y fidelizar más clientes</button>
+        <button data-value="Inventario y Logística">Controlar y optimizar inventarios</button>
+        <button data-value="Finanzas y Costos">Tener claridad y rentabilidad financiera</button>
+      </div>
     </div>
-  </div>
 
-  <!-- 6️⃣ Herramientas -->
-  <div id="pregunta6" style="display:none;">
-    <label>¿Qué herramientas digitales usas hoy para tu negocio?</label>
-    <div class="opciones">
-      <button data-value="Ninguna">Aún no uso herramientas digitales</button>
-      <button data-value="Software contable">Solo manejo un software contable</button>
-      <button data-value="Gestión de inventario">Uso algo para controlar inventario</button>
-      <button data-value="CRM o marketing">Ya aplico sistemas de ventas o marketing</button>
+    <!-- 5️⃣ Meta -->
+    <div id="pregunta5" style="display:none;">
+      <label>¿Cuál es tu meta más importante en los próximos 6 meses?</label>
+      <div class="opciones">
+        <button data-value="Aumentar ventas">Aumentar ventas y presencia en el mercado</button>
+        <button data-value="Reducir costos">Reducir costos sin perder calidad</button>
+        <button data-value="Digitalización de procesos">Digitalizar mi negocio para ganar tiempo</button>
+      </div>
     </div>
-  </div>
 
-  <div id="final">
-    ✅ Gracias por compartir tu información.<br>
-    Recibirás una propuesta personalizada para impulsar tu negocio. 💡
-  </div>
+    <!-- 6️⃣ Herramientas -->
+    <div id="pregunta6" style="display:none;">
+      <label>¿Qué herramientas digitales usas hoy para tu negocio?</label>
+      <div class="opciones">
+        <button data-value="Ninguna">Aún no uso herramientas digitales</button>
+        <button data-value="Software contable">Solo manejo un software contable</button>
+        <button data-value="Gestión de inventario">Uso algo para controlar inventario</button>
+        <button data-value="CRM o marketing">Ya aplico sistemas de ventas o marketing</button>
+      </div>
+    </div>
 
-  <!-- 🎵 Sonido -->
-  <audio id="ping" preload="auto">
-    <source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" type="audio/ogg">
-  </audio>
-</main>
+    <div id="final">
+      ✅ Gracias por compartir tu información.<br>
+      Recibirás una propuesta personalizada para impulsar tu negocio. 💡
+    </div>
 
-<script>
-/* 🌐 Autoajuste de API: local o Render */
-const API_URL = window.location.hostname.includes("localhost")
-  ? "http://localhost:10000/api/empresas"
-  : "https://srm-backend-web.onrender.com/api/empresas";
+    <audio id="ping" preload="auto">
+      <source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" type="audio/ogg">
+    </audio>
+  </main>
 
+  <script>
+    const API_URL = window.location.hostname.includes("localhost")
+      ? "http://localhost:10000/api/empresas"
+      : "https://srm-backend-web.onrender.com/api/empresas";
 
-const sessionId = localStorage.getItem("srm_session") || `SRM-${Date.now()}-${Math.random().toString(36).substr(2,6)}`;
-localStorage.setItem("srm_session", sessionId);
-let empresa = { session_id: sessionId };
+    const sessionId = localStorage.getItem("srm_session") || `SRM-${Date.now()}-${Math.random().toString(36).substr(2,6)}`;
+    localStorage.setItem("srm_session", sessionId);
+    let empresa = { session_id: sessionId };
 
-/* ✅ Validaciones */
-function validarEmail(correo){return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(correo);}
-function validarNombre(n){return n.trim().length>=6;}
-function validarTel(t){return /^3\d{9}$/.test(t);}
+    function validarEmail(correo){return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(correo);}
+    function validarNombre(n){return n.trim().length>=6;}
+    function validarTel(t){return /^3\d{9}$/.test(t);}
 
-/* 🚀 Continuar */
-document.getElementById("btnContinuar").addEventListener("click",()=>{
-  const n = document.getElementById("nombre").value.trim();
-  const c = document.getElementById("correo").value.trim();
-  const w = document.getElementById("whatsapp").value.trim();
-  if(!validarNombre(n)){alert("Por favor ingresa tu nombre completo.");return;}
-  if(!validarEmail(c)){alert("Ingresa un correo válido.");return;}
-  if(!validarTel(w)){alert("Ingresa un número de WhatsApp válido (10 dígitos).");return;}
-  empresa.nombre = n; empresa.correo = c; empresa.whatsapp = w;
-  mostrar("pregunta2");
-});
-
-/* 🔄 Cambiar sección */
-function mostrar(id){
-  document.querySelectorAll("main > div").forEach(d=>d.style.display="none");
-  document.getElementById(id).style.display="block";
-}
-
-/* 🔔 Sonido + toast */
-function reproducirPing(){
-  const ping = document.getElementById("ping");
-  if(ping){ ping.volume = 0.4; ping.currentTime = 0; ping.play().catch(()=>{}); }
-}
-
-function mostrarToast(){
-  const toast = document.createElement("div");
-  toast.innerHTML = `✅ Diagnóstico SRM guardado correctamente`;
-  Object.assign(toast.style,{
-    position:"fixed",bottom:"24px",right:"24px",
-    background:"#0A2F7B",color:"#fff",padding:"12px 18px",
-    borderRadius:"10px",fontFamily:"Poppins, sans-serif",
-    fontSize:"14px",zIndex:"99999",animation:"toastIn 0.4s ease"
-  });
-  document.body.appendChild(toast);
-  setTimeout(()=>toast.remove(),4000);
-}
-
-/* 📨 Enviar datos */
-async function enviarEmpresa(){
-  try {
-    const res = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(empresa)
+    document.getElementById("btnContinuar").addEventListener("click",()=>{
+      const n=document.getElementById("nombre").value.trim();
+      const c=document.getElementById("correo").value.trim();
+      const w=document.getElementById("whatsapp").value.trim();
+      if(!validarNombre(n)){alert("Por favor ingresa tu nombre completo.");return;}
+      if(!validarEmail(c)){alert("Ingresa un correo válido.");return;}
+      if(!validarTel(w)){alert("Ingresa un número de WhatsApp válido (10 dígitos).");return;}
+      empresa.nombre=n; empresa.correo=c; empresa.whatsapp=w;
+      mostrar("pregunta2");
     });
-    if(!res.ok) throw new Error("Error en servidor");
-    console.log("✅ Empresa guardada:", empresa);
-  } catch(e){
-    console.error("⚠️ Error al guardar empresa:", e);
-  }
-}
 
-/* ✅ Cierre */
-function cerrarCuestionario(){
-  reproducirPing();
-  mostrarToast();
-  enviarEmpresa();  
-  document.querySelector("main").innerHTML = `
-    <h2 style="color:#0A2F7B;">✅ Gracias por completar tu diagnóstico</h2>
-    <p>Recibirás una propuesta personalizada muy pronto.</p>`;
-}
+    function mostrar(id){
+      document.querySelectorAll("main > div").forEach(d=>d.style.display="none");
+      document.getElementById(id).style.display="block";
+    }
 
-/* ➡️ Flujo de pasos */
-function paso(selector, clave, siguiente){
-  document.querySelectorAll(selector+" .opciones button").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      btn.classList.add("activo");
-      empresa[clave] = btn.dataset.value;
-      setTimeout(()=>mostrar(siguiente),300);
-      if(siguiente === "final"){
-        setTimeout(()=>cerrarCuestionario(),1000);
-      }
-    });
-  });
-}
+    function reproducirPing(){
+      const ping=document.getElementById("ping");
+      if(ping){ ping.volume=0.4; ping.currentTime=0; ping.play().catch(()=>{}); }
+    }
 
-paso("#pregunta2","tipo_empresa","pregunta3");
-paso("#pregunta3","empleados","pregunta4");
-paso("#pregunta4","area_critica","pregunta5");
-paso("#pregunta5","meta_6m","pregunta6");
-paso("#pregunta6","herramientas","final");
-</script>
+    function mostrarToast(){
+      const toast=document.createElement("div");
+      toast.innerHTML=`✅ Diagnóstico SRM guardado correctamente`;
+      Object.assign(toast.style,{
+        position:"fixed",bottom:"24px",right:"24px",
+        background:"#0A2F7B",color:"#fff",padding:"12px 18px",
+        borderRadius:"10px",fontFamily:"Poppins, sans-serif",
+        fontSize:"14px",zIndex:"99999",animation:"toastIn 0.4s ease"
+      });
+      document.body.appendChild(toast);
+      setTimeout(()=>toast.remove(),4000);
+    }
+
+    async function enviarEmpresa(){
+      try{
+        const res=await fetch(API_URL,{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify(empresa)
+        });
+        if(!res.ok) throw new Error("Error en servidor");
+        console.log("✅ Empresa guardada:",empresa);
+      }catch(e){console.error("⚠️ Error al guardar empresa:",e);}
+    }
+
+    function cerrarCuestionario(){
+      reproducirPing(); mostrarToast(); enviarEmpresa();
+      document.querySelector("main").innerHTML=`
+        <h2 style="color:#0A2F7B;">✅ Gracias por completar tu diagnóstico</h2>
+        <p>Recibirás una propuesta personalizada muy pronto.</p>`;
+    }
+
+    function paso(selector,clave,siguiente){
+      document.querySelectorAll(selector+" .opciones button").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+          btn.classList.add("activo");
+          empresa[clave]=btn.dataset.value;
+          setTimeout(()=>mostrar(siguiente),300);
+          if(siguiente==="final"){setTimeout(()=>cerrarCuestionario(),1000);}
+        });
+      });
+    }
+
+    paso("#pregunta2","tipo_empresa","pregunta3");
+    paso("#pregunta3","empleados","pregunta4");
+    paso("#pregunta4","area_critica","pregunta5");
+    paso("#pregunta5","meta_6m","pregunta6");
+    paso("#pregunta6","herramientas","final");
+  </script>
 </body>
 </html>
