@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧭 Panel Administrativo SRM-QK v2.4</title>
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <!-- META SOCIAL -->
+  <meta property="og:title" content="🧭 Panel Administrativo SRM-QK" />
+  <meta property="og:description" content="Administra y analiza las estadísticas del Diagnóstico Empresarial SRM-QK." />
+  <meta property="og:image" content="https://srm-backend-web.onrender.com/android-chrome-512x512.png" />
+  <meta property="og:url" content="https://srm-backend-web.onrender.com/admin_dashboard.html" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="🧭 Panel Administrativo SRM-QK" />
+  <meta name="twitter:description" content="Panel seguro para administración y estadísticas del sistema SRM-QK." />
+  <meta name="twitter:image" content="https://srm-backend-web.onrender.com/android-chrome-512x512.png" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f0f4ff, #eaf7ff);
+      color: #1a1a1a;
+      margin: 0;
+      padding: 0;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: #0a2f7b;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 1.3rem;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+
+    .panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: #f9fcff;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0;
+      color: #0a2f7b;
+    }
+
+    .acciones {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    button {
+      background: #0a2f7b;
+      color: white;
+      padding: 0.7rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin: 0.3rem;
+      transition: background 0.2s;
+    }
+
+    button:hover { background: #063a9d; }
+
+    canvas {
+      width: 100% !important;
+      height: 300px !important;
+    }
+
+    .hidden { display: none; }
+
+    .lista {
+      text-align: left;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    /* 🌙 Modo oscuro */
+    body.dark {
+      background: #121212;
+      color: #e0e0e0;
+    }
+    body.dark main { background: #1f1f1f; }
+    body.dark .card { background: #2c2c2c; color: #fff; }
+    body.dark button { background: #222; }
+    body.dark header { background: #001b4f; }
+  </style>
+</head>
+<body>
+  <header>🧭 Panel Administrativo SRM-QK v2.4</header>
+
+  <main>
+    <div id="login">
+      <h2>🔐 Ingreso de Administrador</h2>
+      <input type="password" id="clave" placeholder="Ingrese clave de acceso"
+        style="padding:0.6rem;border-radius:8px;width:60%;max-width:300px;">
+      <br><br>
+      <button onclick="verificarClave()">Ingresar</button>
+    </div>
+
+    <div id="contenido" class="hidden">
+      <div class="acciones">
+        <button onclick="cargarDatos()">🔄 Actualizar Datos</button>
+        <button onclick="limpiarDatos()">🗑️ Limpiar Base</button>
+        <button onclick="toggleTema()">🌞 / 🌙</button>
+      </div>
+
+      <div class="panel">
+        <div class="card">
+          <h3>🏢 Total Empresas</h3>
+          <p id="totalEmpresas" style="font-size:2rem;font-weight:700;">-</p>
+        </div>
+
+        <div class="card">
+          <h3>🏭 Tipos de Empresa</h3>
+          <canvas id="chartTipos"></canvas>
+        </div>
+
+        <div class="card">
+          <h3>⚙️ Herramientas</h3>
+          <canvas id="chartHerramientas"></canvas>
+        </div>
+
+        <div class="card">
+          <h3>🚦 Áreas Críticas</h3>
+          <canvas id="chartAreas"></canvas>
+        </div>
+
+        <div class="card">
+          <h3>🕓 Últimos registros</h3>
+          <ul id="listaRecientes" class="lista"></ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const ADMIN_KEY = "SRM2025ADMIN";
+
+    function verificarClave() {
+      const clave = document.getElementById("clave").value.trim();
+      if (clave !== ADMIN_KEY) return alert("Clave incorrecta ❌");
+      document.getElementById("login").classList.add("hidden");
+      document.getElementById("contenido").classList.remove("hidden");
+      cargarDatos();
+    }
+
+    async function cargarDatos() {
+      try {
+        const res = await fetch(window.location.origin + "/api/stats");
+        const data = await res.json();
+        if (!data.success) throw new Error("Error al cargar estadísticas");
+
+        document.getElementById("totalEmpresas").textContent = data.total_empresas;
+
+        graficar("chartTipos", convertir(data.tipos, "tipo"));
+        graficar("chartHerramientas", convertir(data.herramientas, "herramienta"));
+        graficar("chartAreas", convertir(data.areas, "area"));
+
+        const lista = document.getElementById("listaRecientes");
+        lista.innerHTML = "";
+        data.recientes.forEach(r => {
+          const li = document.createElement("li");
+          li.textContent = `${r.nombre} — ${r.tipo_empresa || "Sin tipo"} (${new Date(r.fecha).toLocaleString("es-CO")})`;
+          lista.appendChild(li);
+        });
+      } catch (err) {
+        console.error("❌ Error al obtener estadísticas:", err);
+        alert("Error al cargar datos del servidor.");
+      }
+    }
+
+    function convertir(arr, campo) {
+      const obj = {};
+      arr.forEach(x => { obj[x[campo]] = Number(x.count); });
+      return obj;
+    }
+
+    function graficar(id, dataset) {
+      const ctx = document.getElementById(id);
+      if (!ctx) return;
+      new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: Object.keys(dataset),
+          datasets: [{
+            data: Object.values(dataset),
+            backgroundColor: [
+              "#00b6c8","#0a2f7b","#4caf50","#f4b400","#e91e63","#ff5722","#607d8b","#9c27b0"
+            ]
+          }]
+        },
+        options: { responsive: true, plugins: { legend: { position: "bottom" } } }
+      });
+    }
+
+    async function limpiarDatos() {
+      const clave = prompt("Introduce la clave de administrador para limpiar:");
+      if (clave !== ADMIN_KEY) return alert("Clave incorrecta ❌");
+      if (!confirm("⚠️ Esto eliminará todos los registros. ¿Continuar?")) return;
+
+      try {
+        const res = await fetch(window.location.origin + "/api/limpiar", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ key: ADMIN_KEY })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert("✅ Base de datos vaciada correctamente.");
+          cargarDatos();
+        } else alert("❌ Error: " + data.error);
+      } catch (err) {
+        alert("Error al conectar con el servidor");
+      }
+    }
+
+    function toggleTema() {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("tema", document.body.classList.contains("dark") ? "oscuro" : "claro");
+    }
+
+    if (localStorage.getItem("tema") === "oscuro") document.body.classList.add("dark");
+  </script>
+</body>
+</html>

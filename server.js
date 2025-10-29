@@ -172,6 +172,60 @@ app.delete("/api/limpiar", async (req, res) => {
     res.status(500).json({ success: false, error: "Error interno del servidor" });
   }
 });
+// =====================================================
+// 📊 Endpoint de estadísticas globales
+// =====================================================
+app.get("/api/stats", async (req, res) => {
+  try {
+    // 1️⃣ Total de registros
+    const totalEmpresas = await pool.query(`SELECT COUNT(*) FROM empresas`);
+
+    // 2️⃣ Distribución por tipo de empresa
+    const tipos = await pool.query(`
+      SELECT COALESCE(tipo_empresa, 'No especifica') AS tipo, COUNT(*) 
+      FROM empresas 
+      GROUP BY tipo_empresa
+      ORDER BY COUNT(*) DESC;
+    `);
+
+    // 3️⃣ Herramientas más usadas
+    const herramientas = await pool.query(`
+      SELECT COALESCE(herramientas, 'No especifica') AS herramienta, COUNT(*) 
+      FROM empresas 
+      GROUP BY herramientas
+      ORDER BY COUNT(*) DESC;
+    `);
+
+    // 4️⃣ Áreas críticas más comunes
+    const areas = await pool.query(`
+      SELECT COALESCE(area_critica, 'No especifica') AS area, COUNT(*) 
+      FROM empresas 
+      GROUP BY area_critica
+      ORDER BY COUNT(*) DESC;
+    `);
+
+    // 5️⃣ Últimos registros (para auditoría)
+    const recientes = await pool.query(`
+      SELECT nombre, tipo_empresa, fecha 
+      FROM empresas 
+      ORDER BY fecha DESC 
+      LIMIT 5;
+    `);
+
+    res.json({
+      success: true,
+      total_empresas: Number(totalEmpresas.rows[0].count),
+      tipos: tipos.rows,
+      herramientas: herramientas.rows,
+      areas: areas.rows,
+      recientes: recientes.rows,
+    });
+  } catch (error) {
+    console.error("❌ Error al obtener estadísticas:", error.message);
+    res.status(500).json({ success: false, message: "Error al generar estadísticas" });
+  }
+});
+
 
 // =====================================================
 // 🚀 Inicialización del servidor
